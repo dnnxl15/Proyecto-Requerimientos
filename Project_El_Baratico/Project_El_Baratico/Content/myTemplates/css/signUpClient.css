@@ -1,0 +1,136 @@
+﻿* {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-image: url('../../image/bg-03.jpeg');
+    background-size: 100%;
+    filter: alpha(opacity=80);
+}
+
+.title {
+    font-size: 70px;
+    padding-left: 580px;
+    padding-top: 200px;
+    color: rgb(255, 255, 255);
+}
+
+h4 {
+    font-family: 'Open Sans';
+    letter-spacing: 2px;
+}
+
+a {
+    padding-left: 180px;
+    text-decoration: none;
+    color: #fff;
+}
+
+.form {
+    position: relative;
+    font-family: 'Open Sans';
+    font-size: 24px;
+    letter-spacing: 2px;
+    margin: 100px auto;
+    width: 600px;
+    border-radius: 15px;
+    background: rgba(168, 168, 168,0.9);
+    padding: 20px 60px 20px 60px;
+}
+
+    .form label {
+        font-size: 15px;
+    }
+
+    .form form {
+        margin-bottom: 40px;
+    }
+
+.form-action {
+    cursor: pointer;
+}
+
+.form-heading {
+    color: rgba(255, 255, 255, 0.65);
+    font-weight: 400;
+    font-size: 24px;
+    background: none;
+    text-decoration: none;
+}
+
+.form-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: white;
+    margin: 55px 50px;
+    margin-top: 30px;
+    padding-left: 50px;
+}
+
+.form-inputs {
+    background: white;
+    border-radius: 5px;
+    width: 480px;
+    padding: 10px 70px;
+    margin-bottom: 80px;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+    position: relative;
+    /* transform: translateX(-60px); */
+}
+
+    .form-inputs.show {
+        /* transform: translateX(60px); */
+        width: 600px;
+    }
+
+.form-input {
+    font-size: 18px;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+    .form-input label {
+        display: block;
+        color: #1fa0f6;
+        text-transform: uppercase;
+    }
+
+    .form-input input {
+        width: 100%;
+        color: #555555;
+        border: none;
+        padding: 10px 0;
+        -webkit-transition: border-bottom 0.5s;
+        transition: border-bottom 0.5s;
+        border-bottom: solid 2px rgba(85, 85, 85, 0.2);
+        font-weight: 700;
+    }
+
+        .form-input input:focus {
+            border-bottom: solid 2px rgba(247, 102, 112, 0.3);
+        }
+
+.form-button {
+    border: 0;
+    color: rgba(255, 255, 255, 0.65);
+    padding: 20px;
+}
+
+.form-button__cancel {
+    background: none;
+}
+
+.form-button__submit {
+    background: #1fa0f6;
+    border-radius: 5px;
+    color: white;
+}
+
+input:focus {
+    outline: 0;
+}

@@ -1,0 +1,66 @@
+﻿@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Welcome to El Baratico</title>
+    <link rel="stylesheet" href= "@Url.Content("~/Content/myTemplates/")css/loginUser.css" />
+
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+</head>
+<body>
+    <div class="login-box">
+        <img src="~/Content/image/user.png" class="avatar" />
+        <h1>Sign in</h1>
+        <form>
+            <p>Username</p>
+            <input type="text" name="username" placeholder:"Enter username" />
+            <p>Password</p>
+            <input type="password" name="password" placeholder:"Enter password" />
+            <input type="submit" name="submit" value="Login" />
+            <a href="a" class="forget">Forget password</a>
+            <h4> Don´t have a account?</h4>
+            <a class="signUp">Sign Up as</a>
+            <a class="client" href="signClient" target="_blank">Client or </a>
+            <a class="administrator" href="signAdministrator" target="_blank">Administrator</a>
+
+
+        </form>
+    </div>
+    <div class="welcome-section content-hidden">
+        <div class="content-wrap">
+            <ul class="fly-in-text">
+                <li>W</li>
+                <li>e</li>
+                <li>l</li>
+                <li>c</li>
+                <li>o</li>
+                <li>m</li>
+                <li>e</li>
+            </ul>
+            <a href="#" class="enter-button">ENTER</a>
+        </div>
+    </div>
+    <script type="text/javascript">
+        $(function () {
+            var welcomeSection = $('.welcome-section'),
+                enterButton = welcomeSection.find('.enter-button');
+
+            setTimeout(function () {
+                welcomeSection.removeClass('content-hidden');
+            }, 800);
+            enterButton.on('click', function (e) {
+                e.preventDefault();
+                welcomeSection.addClass('content-hidden').fadeOut();
+            });
+        })
+
+    </script>
+</body>
+</html>
