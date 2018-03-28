@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-03-2018 a las 05:42:47
+-- Tiempo de generación: 29-03-2018 a las 00:47:50
 -- Versión del servidor: 10.1.28-MariaDB
 -- Versión de PHP: 7.1.10
 
@@ -68,6 +68,15 @@ SELECT SUM(purchase.amount) AS amount, SUM(purchase.finalAmount) AS finalAmount,
 FROM purchase
 WHERE getClientID(pClientName) = purchase.clientID AND dateOfPurchase >= DATE_SUB(NOW(), INTERVAL 20 MINUTE)
 GROUP BY purchase.clientID;
+END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getMessageByClient` (IN `pId` INT)  NO SQL
+    COMMENT 'get all the message by client'
+BEGIN
+SELECT message.clientText AS clientText, message.admiText AS admiText, message.dateOfMessage AS date, message.clientID AS clientID
+FROM message
+WHERE message.clientID = pId
+ORDER BY message.dateOfMessage ASC;
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `getOffer` ()  NO SQL
@@ -186,11 +195,11 @@ BEGIN
 	VALUES(NULL, pName, pLastname, pUsername, pPassword, pAddress, pEmail);
 END$$
 
-CREATE DEFINER=`root`@`localhost` PROCEDURE `insertMessage` (IN `pClientText` VARCHAR(100), IN `pClientName` VARCHAR(100))  NO SQL
+CREATE DEFINER=`root`@`localhost` PROCEDURE `insertMessage` (IN `pClientText` VARCHAR(100), IN `pClientId` INT)  NO SQL
     COMMENT 'Procedure that insert into the table message'
 BEGIN 
 	INSERT INTO message(messageID, clientText, admiText, clientID, dateOfMessage) 
-	VALUES(NULL, pClientText, NULL, getClientID(pClientName), NULL);
+	VALUES(NULL, pClientText, "", pClientId, NULL);
 END$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `insertOffer` (IN `pAdmiName` VARCHAR(100), IN `pProductName` VARCHAR(100), IN `pPercentage` INT(13) UNSIGNED)  NO SQL
@@ -420,7 +429,12 @@ CREATE TABLE `message` (
 --
 
 INSERT INTO `message` (`messageID`, `clientText`, `admiText`, `clientID`, `dateOfMessage`) VALUES
-(1, 'Does Coca-Cola is 3L?', 'Yes, it is', 2, '2018-03-20 16:22:36');
+(1, 'Does Coca-Cola is 3L?', 'Yes, it is', 2, '2018-03-20 16:22:36'),
+(3, 'How much does it cost the bottle of alcohol?', '500', 2, '2018-03-28 15:19:37'),
+(4, 'Hola', '\"\"', 2, '2018-03-28 16:08:39'),
+(5, 'Adios', '\"\"', 2, '2018-03-28 16:21:06'),
+(6, 'Hola Coto', '', 2, '2018-03-28 16:22:39'),
+(7, 'Usted es administrador?', '', 2, '2018-03-28 16:25:26');
 
 --
 -- Disparadores `message`
@@ -624,7 +638,7 @@ ALTER TABLE `client`
 -- AUTO_INCREMENT de la tabla `message`
 --
 ALTER TABLE `message`
-  MODIFY `messageID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `messageID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `offer`

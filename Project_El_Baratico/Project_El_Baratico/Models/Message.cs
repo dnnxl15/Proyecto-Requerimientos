@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Web;
 
@@ -9,12 +10,19 @@ namespace Project_El_Baratico.Models
     {
         // Atributes
 
-        string name;
-        DateTime dateOfMessage;
+        string menssage;
+        SqlDateTime dateOfMessage;
+        Client client;
+        string response;
 
-        // Getter and setter
+        public string Menssage { get; set ; }
+        public SqlDateTime DateOfMessage { get; set; }
+        public Client Client { get; set; }
+        public string Response { get; set; }
 
-        public string Name { get; set; }
-        public DateTime DateOfMessage { get; set; }
+        public string getDateString()
+        {
+            return dateOfMessage.ToString();
+        }
     }
 }

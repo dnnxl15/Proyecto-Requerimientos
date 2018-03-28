@@ -12,6 +12,10 @@ namespace Project_El_Baratico.Controllers
     {
         Cart cart = Cart.Instance; // Singleton of the instance of cart
         ControlData control;
+        Client client = new Client
+        {
+            Id = 2
+        };
 
         /**
          * Method Index
@@ -136,6 +140,37 @@ namespace Project_El_Baratico.Controllers
             ViewBag.Collection = control.searchProduct(name);
             ViewBag.Second = control.getCategory();
             return View();
+        }
+
+        /**
+        * Method send message view
+        * Author: Danny Xie Li
+        * Description: Redirect to the view send message.
+        * Created: 28/03/18
+        * Last modification: 28/03/18
+        */
+        public ActionResult sendMessage()
+        {
+            int id = client.Id;
+            control = new ControlData();
+            ViewBag.listMensage = control.getMessage(id);
+            ViewBag.Second = control.getCategory();
+            return View();
+        }
+
+        /**
+        * Method send text operation
+        * Author: Danny Xie Li
+        * Description: Redirect to the view send message after send the text operation.
+        * Created: 28/03/18
+        * Last modification: 28/03/18
+        */
+        public ActionResult sendText()
+        {
+            string text = Request.Form["pText"].ToString();
+            control = new ControlData();
+            control.insertMessage(text,client.Id);
+            return RedirectToAction("sendMessage", "Offer");
         }
     }
 }

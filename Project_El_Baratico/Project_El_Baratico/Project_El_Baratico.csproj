@@ -219,6 +219,7 @@
     <Content Include="Views\Offer\payCart.cshtml" />
     <Content Include="Views\Offer\searchCategory.cshtml" />
     <Content Include="Views\Offer\searchProduct.cshtml" />
+    <Content Include="Views\Offer\sendMessage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -22,5 +22,10 @@ namespace Project_El_Baratico.Interface
         public const string PROCEDURE_GET_PRODUCT_BY_ID = "getProductById";
         public const string PROCEDURE_GET_PRODUCT_BY_CATEGORY = "getProductByCategory";
         public const string PROCEDURE_GET_PRODUCT_BY_NAME = "searchProduct";
+
+
+        public const string PROCEDURE_GET_MESSAGE_BY_CLIENT = "getMessageByClient";
+        public const string PROCEDURE_INSERT_MESSAGE = "insertMessage";
+
     }
 }

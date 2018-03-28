@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
+using System.Data.SqlTypes;
+
 
 namespace Project_El_Baratico.Models
 {
@@ -277,6 +279,77 @@ namespace Project_El_Baratico.Models
                 listProduct.Add(tmp);
             }
             return listProduct;
+        }
+
+        /**
+          * Method get the message from a client
+          * Author: Danny Xie Li
+          * Description: get the message from a specific client
+          * Created: 28/03/18
+          * Last modification: 28/03/18
+         */
+        public List<Message> getMessage(int pId)
+        {
+            DBConnection conection = new DBConnection();
+            conection.OpenConnection();
+            MySqlCommand command = new MySqlCommand(Interface.IConstant.PROCEDURE_GET_MESSAGE_BY_CLIENT, conection.getConnection());
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@pId", pId);
+            MySqlDataReader reader = command.ExecuteReader();
+            List<Message> listMessage = new List<Message>();
+            while (reader.Read())
+            {
+                string response;
+                if (reader.GetString("admiText") == null)
+                {
+                    response = "";
+                }
+                else
+                {
+                    response = reader.GetString("admiText");
+                }
+                Message tmp = new Message //Create an instance of the object product
+                {
+                    Menssage = reader.GetString("clientText"),
+                    Client = new Client {
+                        Id = reader.GetInt16("clientID")
+                    },
+                    DateOfMessage = reader.GetMySqlDateTime("date").GetDateTime(),
+                    Response = response
+                };
+                listMessage.Add(tmp);
+            }
+            return listMessage;
+        }
+
+        /**
+          * Method insert the message from a client
+          * Author: Danny Xie Li
+          * Description: insert the message from a specific client
+          * Created: 28/03/18
+          * Last modification: 28/03/18
+         */
+        public void insertMessage(String pText, int pIdClient)
+        {
+            DBConnection conection = new DBConnection();
+            conection.OpenConnection();
+            MySqlCommand command = new MySqlCommand(Interface.IConstant.PROCEDURE_INSERT_MESSAGE, conection.getConnection());
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@pClientText", pText);          // Set the parameter
+            command.Parameters.AddWithValue("@pClientId", pIdClient);  // Set the parameter
+          
+            MySqlTransaction trx = conection.getConnection().BeginTransaction();
+            try
+            {
+                command.Prepare();
+            }
+            catch (Exception e)
+            {
+            }
+            command.Transaction = trx;
+            command.ExecuteNonQuery();
+            trx.Commit();
         }
     }
 }

@@ -10,19 +10,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title>Ofertas</title>
+    <title>Chat</title>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Ofertas</a>
+        <a class="navbar-brand" href="#">Chat</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active"><a class="nav-link">Home <span class="sr-only">(current)</span></a></li>
-                <li class="nav-item"><a href="seeProduct" class="nav-link">Product</a></li>
-                <li class="nav-item"><a href="sendMessage" class="nav-link">Chat</a></li>
+                <li class="nav-item"><a class="nav-link" href="Offer">Ofertas</a></li>
+                <li class="nav-item"><a class="nav-link">Chat</a></li>
                 <li class="nav-item"><a class="nav-link">Compras</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -30,10 +30,10 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categorias <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         @foreach (var str in ViewBag.Second)
-                         {
-                            <li><a href= @Url.Action("searchCategory", "Offer", new {pCategory=str.getName()}) >@Html.Raw(str.getName())</a></li>
+                        {
+                            <li><a href=@Url.Action("searchCategory", "Offer", new {pCategory=str.getName()})>@Html.Raw(str.getName())</a></li>
                             <li role="separator" class="divider"></li>
-                         }
+                        }
                     </ul>
                 </li>
             </ul>
@@ -46,18 +46,25 @@
             </form>
         </div>
     </nav>
+
     <form method="post" action="ActionName">
-    @foreach (var str in ViewBag.Collection)
-    {
-        <div>
-            <h1 name="pProduct">Name @Html.Raw(str.Name)</h1>
-            <h2>Original price @Html.Raw(str.OriginalPrice)</h2>
-            <h3>Offer price @Html.Raw(str.OfferPrice)</h3>
-            <h3>ID : @Html.Raw(str.idOffer)</h3>
-            <input id="btn1" type="button" value="Add to cart" onclick="javascript:SubmitForm(@Html.Raw(str.idOffer))" />
-            <button name="Rate" id="btnRate_" + str.idOffer>Rate</button>
-        </div>
-    }
+        @foreach (var str in ViewBag.listMensage)
+        {
+            <div>
+                <h1 name="pProduct">-----------------------------</h1>
+                <h1 name="pProduct">@Html.Raw(str.DateOfMessage);</h1>
+
+                <h2>@Html.Raw(str.Menssage)</h2>
+                <h2>Response</h2>
+                <h3>@Html.Raw(str.Response)</h3>
+
+            </div>
+        }
+    </form>
+
+    <form  action="sendText" method="post">
+        <input  type="search" placeholder="Text" name="pText" aria-label="Search">
+        <button type="submit">Send</button>
     </form>
 
     <!-- Optional JavaScript -->
@@ -66,14 +73,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script language="javascript" type="text/javascript">
-        function SubmitForm(id)
-        {
-            document.forms[0].action = 'addOffer/'+id+'?' ;
-            document.forms[0].submit();
-        }
-        function SubmitCategory(category)
-        {
-            document.forms[0].action = 'searchCategory/' + category + '?';
+        function SubmitForm(id) {
+            document.forms[0].action = 'addProduct/' + id + '?';
             document.forms[0].submit();
         }
     </script>
