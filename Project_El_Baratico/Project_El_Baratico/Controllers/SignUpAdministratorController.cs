@@ -9,12 +9,25 @@ namespace Project_El_Baratico.Controllers
 {
     public class SignUpAdministratorController : Controller
     {
-        // GET: SignUpAdministrator
+        /**
+        * Method register administrator view
+        * Author: Danny Xie Li
+        * Description: Index, register administrator view
+        * Created: 25/03/18
+        * Last modification: 27/03/18
+        */
         public ActionResult registerAdministrator()
         {
             return View();
         }
 
+        /**
+        * Method register administrator to the database
+        * Author: Danny Xie Li
+        * Description: Index, register administrator to the database using the post method.
+        * Created: 25/03/18
+        * Last modification: 27/03/18
+        */
         [HttpPost]
         public ActionResult saveAdministrator()
         {
@@ -38,7 +51,13 @@ namespace Project_El_Baratico.Controllers
             }
         }
 
-
+        /**
+        * Method login user view
+        * Author: Danny Xie Li
+        * Description: Redirect to the login user view.
+        * Created: 25/03/18
+        * Last modification: 27/03/18
+        */
         public ActionResult loginUser()
         {
             return RedirectToAction("LoginUser", "Login");

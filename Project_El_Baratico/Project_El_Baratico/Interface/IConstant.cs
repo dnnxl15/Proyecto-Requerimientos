@@ -10,11 +10,17 @@ namespace Project_El_Baratico.Interface
     {
         public const string PASSWORD= "12";
         public const string SERVER = "localhost";
-        public const string DATABASE = "reqbase";
+        public const string DATABASE = "proyecto";
         public const string USERNAME = "Admin";
         public const string CONNECTION = "SERVER=" + SERVER + ";" + "DATABASE=" + DATABASE + ";" + "UID=" + USERNAME + ";" + "PASSWORD=" + PASSWORD + ";";
         public const string PROCEDURE_INSERT_CLIENT = "insertClient";
-
-        public const string PROCEDURE_INSERT_ADMINISTRATOR = "insertAdministrator";
+        public const string PROCEDURE_INSERT_ADMINISTRATOR = "insertAdmi";
+        public const string PROCEDURE_GET_PRODUCT = "getProduct";
+        public const string PROCEDURE_GET_OFFER = "getOffer";
+        public const string PROCEDURE_GET_CATEGORY = "getCategory";
+        public const string PROCEDURE_GET_OFFER_BY_ID = "getOfferById";
+        public const string PROCEDURE_GET_PRODUCT_BY_ID = "getProductById";
+        public const string PROCEDURE_GET_PRODUCT_BY_CATEGORY = "getProductByCategory";
+        public const string PROCEDURE_GET_PRODUCT_BY_NAME = "searchProduct";
     }
 }

@@ -2,7 +2,6 @@
     Layout = null;
 }
 
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +10,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Welcome to El Baratico</title>
     <link rel="stylesheet" href= "@Url.Content("~/Content/myTemplates/")css/loginUser.css" />
-
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 </head>
 <body>
@@ -29,8 +27,6 @@
             <a class="signUp">Sign Up as</a>
             <a class="client" href="signClient" target="_blank">Client or </a>
             <a class="administrator" href="signAdministrator" target="_blank">Administrator</a>
-
-
         </form>
     </div>
     <div class="welcome-section content-hidden">
@@ -51,7 +47,6 @@
         $(function () {
             var welcomeSection = $('.welcome-section'),
                 enterButton = welcomeSection.find('.enter-button');
-
             setTimeout(function () {
                 welcomeSection.removeClass('content-hidden');
             }, 800);
@@ -60,7 +55,6 @@
                 welcomeSection.addClass('content-hidden').fadeOut();
             });
         })
-
     </script>
 </body>
 </html>

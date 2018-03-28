@@ -1,0 +1,77 @@
+﻿@{
+    Layout = null;
+}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Ofertas</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#"> @ViewBag.title</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active"><a class="nav-link">Home <span class="sr-only">(current)</span></a></li>
+                <li class="nav-item"><a class="nav-link" href="Offer">Ofertas</a></li>
+                <li class="nav-item"><a class="nav-link">Chat</a></li>
+                <li class="nav-item"><a class="nav-link">Compras</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categorias <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        @foreach (var str in ViewBag.Second)
+                        {
+                            <li><a href=@Url.Action("searchCategory", "Offer", new {pCategory=str.getName()})>@Html.Raw(str.getName())</a></li>
+                            <li role="separator" class="divider"></li>
+                        }
+                    </ul>
+                </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0" action="searchProduct" method="post">
+                <input class="form-control mr-sm-2" type="search" placeholder="Search" name="pProduct" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+            <form class="form-inline my-2 my-lg-0">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><a href="payCart" class="nav-link">Pay</a></button>
+            </form>
+        </div>
+    </nav>
+
+    <form method="post" action="ActionName">
+        @foreach (var str in ViewBag.Collection)
+        {
+            <div>
+                <h1 name="pProduct">@Html.Raw(str.Name);</h1>
+                <h2>@Html.Raw(str.Price)</h2>
+                <h3>@Html.Raw(str.Category)</h3>
+                <h3>@Html.Raw("ID: " + str.Id)</h3>
+                <input id="btn1" type="button" value="Add to cart" onclick="javascript:SubmitForm(@str.Id)" />
+                <button name="Rate" id="btnRate_" + str.Id> Rate</button>
+            </div>
+        }
+    </form>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script language="javascript" type="text/javascript">
+        function SubmitForm(id)
+        {
+            document.forms[0].action = 'addProduct/' + id + '?';
+            document.forms[0].submit();
+        }
+    </script>
+</body>
+</html>

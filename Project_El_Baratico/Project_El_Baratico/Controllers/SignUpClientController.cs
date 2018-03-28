@@ -9,22 +9,37 @@ namespace Project_El_Baratico.Controllers
 {
     public class SignUpClientController : Controller
     {
-        // GET: SignUpClient
+        /**
+         * Method Index
+         * Author: Danny Xie Li
+         * Description: Index view of the Sign up control.
+         * Created: 25/03/18
+         * Last modification: 27/03/18
+         */
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult any()
-        {
-            return Content("This");
-        }
-
+        /**
+         * Method register client
+         * Author: Danny Xie Li
+         * Description: Register client view.
+         * Created: 25/03/18
+         * Last modification: 27/03/18
+         */
         public ActionResult registerClient()
         {
             return View();
         }
 
+        /**
+         * Method save client
+         * Author: Danny Xie Li
+         * Description: Save client to the database.
+         * Created: 25/03/18
+         * Last modification: 27/03/18
+         */
         [HttpPost]
         public ActionResult saveClient()
         {
@@ -47,8 +62,14 @@ namespace Project_El_Baratico.Controllers
                 return registerClient();
             }
         }
-    
 
+       /**
+        * Method login user
+        * Author: Danny Xie Li
+        * Description: Login user view.
+        * Created: 25/03/18
+        * Last modification: 27/03/18
+        */
         public ActionResult loginUser()
         {
             return RedirectToAction("LoginUser", "Login");

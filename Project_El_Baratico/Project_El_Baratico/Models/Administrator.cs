@@ -8,6 +8,7 @@ namespace Project_El_Baratico.Models
 {
     public class Administrator
     {
+        // Atributes of the administrator
         private string name;
         private string lastname;
         private string username;
@@ -16,7 +17,7 @@ namespace Project_El_Baratico.Models
         private string email;
         private string confirm;
 
-
+        // Getter and setter
         [Required(ErrorMessage = "Please Enter name")]
         public string Name { get; set; }
         [Required(ErrorMessage = "Please Enter lastname")]

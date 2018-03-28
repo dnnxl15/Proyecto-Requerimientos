@@ -12,6 +12,8 @@ namespace Project_El_Baratico.Models
 {
     public class DBConnection
     {
+        // Atributtes
+
         private MySqlConnection connection;
         private string server;
         private string database;
@@ -20,12 +22,14 @@ namespace Project_El_Baratico.Models
         private string connectValue;
 
         //Constructor
+
         public DBConnection()
         {
             Initialize();
         }
 
         //Initialize values
+
         private void Initialize()
         {
             server = Interface.IConstant.SERVER;
@@ -34,9 +38,16 @@ namespace Project_El_Baratico.Models
             password = Interface.IConstant.PASSWORD;
             connectValue = Interface.IConstant.CONNECTION;
             connection = new MySqlConnection(connectValue);
+
         }
 
-        //open connection to database
+        /**
+         * Method open connection
+         * Author: Danny Xie Li
+         * Description: Open connection to the database return true or false if the database is connected.
+         * Created: 22/03/18
+         * Last modification: 22/03/18
+        */
         public bool OpenConnection()
         {
             try
@@ -46,37 +57,50 @@ namespace Project_El_Baratico.Models
             }
             catch (MySqlException ex)
             {
-                //When handling errors, you can your application's response based 
-                //on the error number.
-                //The two most common error numbers when connecting are as follows:
-                //0: Cannot connect to server.
-                //1045: Invalid user name and/or password.
                 switch (ex.Number)
                 {
                     case 0:
-                        Console.WriteLine("Cannot connect to server.  Contact administrator");
                         break;
 
                     case 1045:
-                        Console.WriteLine("Invalid username/password, please try again");
                         break;
                 }
                 return false;
             }
         }
 
+        /**
+          * Method get connection
+          * Author: Danny Xie Li
+          * Description: Get the object connection.
+          * Created: 22/03/18
+          * Last modification: 22/03/18
+        */
         public MySqlConnection getConnection()
         {
             return this.connection;
         }
 
+        /**
+          * Method get command
+          * Author: Danny Xie Li
+          * Description: Get command putting the parameter the string procedure.
+          * Created: 22/03/18
+          * Last modification: 22/03/18
+        */
         public MySqlCommand getCommand(String pProcedure)
         {
             MySqlCommand cmd = new MySqlCommand(pProcedure, connection);
             return cmd;
         }
 
-        //Close connection
+        /**
+          * Method close connection
+          * Author: Danny Xie Li
+          * Description: close connection return a boolean if the connection is close.
+          * Created: 22/03/18
+          * Last modification: 22/03/18
+        */
         public bool CloseConnection()
         {
             try
@@ -86,10 +110,8 @@ namespace Project_El_Baratico.Models
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine(ex.Message);
                 return false;
             }
         }
-
     }
 }

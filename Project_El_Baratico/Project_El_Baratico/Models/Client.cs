@@ -11,7 +11,8 @@ namespace Project_El_Baratico.Models
 
     public class Client
     {
-        
+        // Attributes
+
         private string name;
         private string lastname;
         private string username;
@@ -20,6 +21,7 @@ namespace Project_El_Baratico.Models
         private string email;
         private string confirm;
 
+        // Getter and setter
 
         [Required(ErrorMessage = "Please Enter name")]
         public string Name { get; set; }
@@ -38,7 +40,6 @@ namespace Project_El_Baratico.Models
         [Required(ErrorMessage = "Please Enter Email")]
         public string Email { get { return email; } set { email = value; } }
         [Compare("Password", ErrorMessage = "Confirm password doesn't match, Type again !")]
-        public string Confirm { get { return confirm; } set{ confirm = value; }
-    }
+        public string Confirm { get { return confirm; } set{ confirm = value; }}
     }
 }
