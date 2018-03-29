@@ -14,7 +14,8 @@ namespace Project_El_Baratico.Controllers
         ControlData control;
         Client client = new Client
         {
-            Id = 2
+            Username = "aBlanco", // Temporal name
+            Id = 2 // Temporal Id
         };
 
         /**
@@ -96,14 +97,14 @@ namespace Project_El_Baratico.Controllers
          * Author: Danny Xie Li
          * Description: Redirect to the view cart, to pay the cart
          * Created: 25/03/18
-         * Last modification: 27/03/18
+         * Last modification: 29/03/18
          */
         public ActionResult payCart()
         {
             control = new ControlData();
             ViewBag.Second = control.getCategory();
-            ViewBag.product = cart.getListProduct();
-            ViewBag.offer = cart.getListOffer();
+            ViewBag.product = cart.getProductInequal();
+            ViewBag.offer = cart.getOfferInequal();
             ViewBag.totalMount = cart.calculateInvoice();
             return View();
         }
@@ -171,6 +172,48 @@ namespace Project_El_Baratico.Controllers
             control = new ControlData();
             control.insertMessage(text,client.Id);
             return RedirectToAction("sendMessage", "Offer");
+        }
+
+        /**
+        * Method pay cart action
+        * Author: Danny Xie Li
+        * Description: Redirect to the payCart view, pay cart action.
+        * Created: 29/03/18
+        * Last modification: 29/03/18
+        */
+        public ActionResult payCartAction()
+        {
+            string text = Request.Form["pCard"].ToString();
+            control = new ControlData();
+            control.insertPurchase(client.Username);
+            List<Product> listProductTmp = cart.getProductInequal();
+            List<Offer> listOffer = cart.getOfferInequal();
+            for (int count = 0; listProductTmp.Count > count; count++)
+            {
+                control.insertCart(client.Username, listProductTmp[count].Name, listProductTmp[count].Mount);
+            }
+            for (int countSecond = 0; listOffer.Count > countSecond; countSecond++)
+            {
+                control.insertCart(client.Username, listOffer[countSecond].Name, listOffer[countSecond].Mount);
+            }
+            cart.setListOffer(new List<Offer>());
+            cart.setListProduct(new List<Product>());
+            return RedirectToAction("payCart", "Offer");
+        }
+
+        /**
+        * Method see the purchase by client
+        * Author: Danny Xie Li
+        * Description: Direct to the view seePurchaseByClient see the purchase by client.
+        * Created: 29/03/18
+        * Last modification: 29/03/18
+        */
+        public ActionResult seePurchaseByClient()
+        {
+            control = new ControlData();
+            ViewBag.Second = control.getCategory();
+            ViewBag.purchase = control.getPurchaseByClient(client.Username);
+            return View();
         }
     }
 }

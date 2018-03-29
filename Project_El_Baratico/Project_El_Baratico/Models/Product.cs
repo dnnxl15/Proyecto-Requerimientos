@@ -14,6 +14,7 @@ namespace Project_El_Baratico.Models
         string category;
         int id;
         int rate;
+        int mount;
 
         // Getter and setter
 
@@ -22,5 +23,6 @@ namespace Project_El_Baratico.Models
         public int Price { get; set; }
         public string Category { get; set; }
         public int Id { get; set; }
+        public int Mount { get; set; }
     }
 }

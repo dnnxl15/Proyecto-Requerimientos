@@ -14,7 +14,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Productos</a>
+        <a class="navbar-brand" href="#">Purchase</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -48,15 +48,13 @@
     </nav>
 
     <form method="post" action="ActionName">
-        @foreach (var str in ViewBag.Collection)
+        @foreach (var purchase in ViewBag.purchase)
         {
             <div>
-                <h1 name="pProduct">@Html.Raw(str.Name);</h1>
-                <h2>@Html.Raw(str.Price)</h2>
-                <h3>@Html.Raw(str.Category)</h3>
-                <h3>@Html.Raw("ID: " + str.Id)</h3>
-                <input id="btn1" type="button" value="Add to cart" onclick="javascript:SubmitForm(@str.Id)" />
-                <button name="Rate" id="btnRate_" + str.Id>Rate </button>
+                <h1 name="pProduct">@Html.Raw("Nombre del producto: " + purchase.ProductName);</h1>
+                <h2>@Html.Raw("Monto: " + purchase.Amount)</h2>
+                <h3>@Html.Raw("Monto final: " + purchase.FinalAmount)</h3>
+                <h3>@Html.Raw("Dia: " + purchase.getDate())</h3>
             </div>
         }
     </form>

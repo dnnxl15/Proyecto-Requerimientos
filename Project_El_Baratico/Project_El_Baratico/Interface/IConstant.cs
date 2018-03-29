@@ -27,5 +27,11 @@ namespace Project_El_Baratico.Interface
         public const string PROCEDURE_GET_MESSAGE_BY_CLIENT = "getMessageByClient";
         public const string PROCEDURE_INSERT_MESSAGE = "insertMessage";
 
+
+        public const string PROCEDURE_INSERT_CART = "insertCart";
+        public const string PROCEDURE_INSERT_PURCHASE = "purchase";
+        public const string PROCEDURE_GET_PURCHASE_BY_CLIENT = "getPurchaseByClient";
+
+
     }
 }

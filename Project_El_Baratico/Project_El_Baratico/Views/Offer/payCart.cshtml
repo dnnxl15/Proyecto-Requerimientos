@@ -23,7 +23,7 @@
                 <li class="nav-item active"><a class="nav-link">Home <span class="sr-only">(current)</span></a></li>
                 <li class="nav-item"><a href="seeProduct" class="nav-link">Product</a></li>
                 <li class="nav-item"><a href="sendMessage" class="nav-link">Chat</a></li>
-                <li class="nav-item"><a class="nav-link">Compras</a></li>
+                <li class="nav-item"><a href="seePurchaseByClient" class="nav-link">Compras</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
@@ -54,6 +54,8 @@
                 <h2>Original price @Html.Raw(offer.OriginalPrice)</h2>
                 <h3>Offer price @Html.Raw(offer.OfferPrice)</h3>
                 <h3>ID: @Html.Raw(offer.idOffer)</h3>
+                <h3>Cantidad: @Html.Raw(offer.Mount)</h3>
+
                 <!--<input id="btn1" type="button" value="Add to cart" onclick="javascript:SubmitForm(@Html.Raw(offer.idOffer))" />-->
             </div>
         }
@@ -64,10 +66,17 @@
                 <h1 name="pProduct">@Html.Raw(product.Name);</h1>
                 <h2>@Html.Raw(product.Price)</h2>
                 <h3>@Html.Raw(product.Category)</h3>
+                <h3>Cantidad: @Html.Raw(product.Mount)</h3>
                 <h3>@Html.Raw("ID" + product.Id)</h3>
             </div>
         }
     </form>
+
+    <form action="payCartAction" method="post">
+        <input type="search" placeholder="Card number" name="pCard" aria-label="Search">
+        <button type="submit">Pay</button>
+    </form>
+
     <h3>Total monto: @ViewBag.totalMount</h3>
 
     <!-- Optional JavaScript -->
@@ -76,8 +85,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script language="javascript" type="text/javascript">
-        function SubmitForm(id)
-        {
+        function SubmitForm(id) {
             document.forms[0].action = 'addOffer/' + id + '?';
             document.forms[0].submit();
         }

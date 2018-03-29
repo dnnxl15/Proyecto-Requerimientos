@@ -164,6 +164,7 @@
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Offer.cs" />
     <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\Purchase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -220,6 +221,7 @@
     <Content Include="Views\Offer\searchCategory.cshtml" />
     <Content Include="Views\Offer\searchProduct.cshtml" />
     <Content Include="Views\Offer\sendMessage.cshtml" />
+    <Content Include="Views\Offer\seePurchaseByClient.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

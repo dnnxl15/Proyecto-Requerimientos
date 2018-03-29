@@ -351,5 +351,93 @@ namespace Project_El_Baratico.Models
             command.ExecuteNonQuery();
             trx.Commit();
         }
+
+        /**
+         * Method insert cart in the database
+         * Author: Danny Xie Li
+         * Description: Insert products to the cart in the database.
+         * Created: 29/03/18
+         * Last modification: 29/03/18
+         */
+        public void insertCart(String pUsername, String pProduct, int pQuantity)
+        {
+            DBConnection conection = new DBConnection();
+            conection.OpenConnection();
+            MySqlCommand command = new MySqlCommand(Interface.IConstant.PROCEDURE_INSERT_CART, conection.getConnection());
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@pClientName", pUsername);          // Set the parameter
+            command.Parameters.AddWithValue("@pProductName", pProduct);  // Set the parameter
+            command.Parameters.AddWithValue("@pQuantity", pQuantity);  // Set the parameter
+
+            MySqlTransaction trx = conection.getConnection().BeginTransaction();
+            try
+            {
+                command.Prepare();
+            }
+            catch (Exception e)
+            {
+            }
+            command.Transaction = trx;
+            command.ExecuteNonQuery();
+            trx.Commit();
+        }
+
+        /**
+        * Method insert purchase in the database
+        * Author: Danny Xie Li
+        * Description: Insert purchase to the cart in the database.
+        * Created: 29/03/18
+        * Last modification: 29/03/18
+        */
+        public void insertPurchase(String pUsername)
+        {
+            DBConnection conection = new DBConnection();
+            conection.OpenConnection();
+            MySqlCommand command = new MySqlCommand(Interface.IConstant.PROCEDURE_INSERT_PURCHASE, conection.getConnection());
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@pClientName", pUsername);          // Set the parameter
+            MySqlTransaction trx = conection.getConnection().BeginTransaction();
+            try
+            {
+                command.Prepare();
+            }
+            catch (Exception e)
+            {
+            }
+            command.Transaction = trx;
+            command.ExecuteNonQuery();
+            trx.Commit();
+        }
+
+        /**
+        * Method get all the purchase by client in the database
+        * Author: Danny Xie Li
+        * Description: get all the purchase by client in the database.
+        * Created: 29/03/18
+        * Last modification: 29/03/18
+        */
+        public List<Purchase> getPurchaseByClient(String pUsername)
+        {
+            DBConnection conection = new DBConnection();
+            conection.OpenConnection();
+            // Change procedure to administrator
+            MySqlCommand command = new MySqlCommand(Interface.IConstant.PROCEDURE_GET_PURCHASE_BY_CLIENT, conection.getConnection());
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@pClientName", pUsername);          // Set the parameter
+            MySqlDataReader reader = command.ExecuteReader();
+            List<Purchase> listPurchase = new List<Purchase>();
+            while (reader.Read())
+            {
+                Purchase tmp = new Purchase // Create an instance of the product
+                {
+                    Amount = reader.GetInt16("amount"),
+                    DateOfPurchase = reader.GetMySqlDateTime("dateOfPurchase").GetDateTime(),
+                    FinalAmount = reader.GetInt16("finalAmount"),
+                    ProductName = reader.GetString("product")
+                };
+                listPurchase.Add(tmp);
+            }
+            return listPurchase;
+        }
     }
 }

@@ -42,6 +42,8 @@ namespace Project_El_Baratico.Models
             }
         }
 
+        public List<Product> ListProduct { get; set; }
+
         /**
          * Method get the list of products
          * Author: Danny Xie Li
@@ -109,5 +111,132 @@ namespace Project_El_Baratico.Models
             invoice.setListProduct(listProduct);
             return invoice.calculateMount(); 
         }
+
+        public List<Product> getProductInequal()
+        {
+            List<Product> listProductTmp = new List<Product>();
+            List<int> listId = new List<int>();
+            for (int firstCount = 0; firstCount < this.listProduct.Count; firstCount++)
+            {
+                if(listId.Contains(listProduct[firstCount].Id))
+                {
+                }
+                else
+                {
+                    listId.Add(listProduct[firstCount].Id);
+                }
+            }
+            for (int count = 0; count < listId.Count; count++)
+            {
+                Product tmp = getProduct(listId[count]);
+                Product tmpProduct = new Product
+                {
+                    Category = tmp.Category,
+                    Id = tmp.Id,
+                    Mount = mountOfItem(tmp),
+                    Price = tmp.Price * mountOfItem(tmp),
+                    Name = tmp.Name,
+                    Rate = tmp.Rate
+                };
+                listProductTmp.Add(tmpProduct);
+            }
+            return listProductTmp;
+        }
+
+        public int mountOfItem(Product pProduct)
+        {
+            int mount = 0;
+            for (int thirdCount = 0; thirdCount < listProduct.Count; thirdCount++)
+            {
+                if (listProduct[thirdCount].Id == pProduct.Id)
+                {
+                    mount = mount + 1;
+                    
+                }
+
+            }
+            return mount;
+        }
+
+        public Product getProduct(int pId)
+        {
+            for (int thirdCount = 0; thirdCount < listProduct.Count; thirdCount++)
+            {
+                if (listProduct[thirdCount].Id == pId)
+                {
+                    return listProduct[thirdCount];
+                }
+            }
+            return null;
+        }
+
+
+        public List<Offer> getOfferInequal()
+        {
+            List<Offer> listOfferTmp = new List<Offer>();
+            List<int> listId = new List<int>();
+            for (int firstCount = 0; firstCount < this.listOffer.Count; firstCount++)
+            {
+                if (listId.Contains(listOffer[firstCount].idOffer))
+                {
+                }
+                else
+                {
+                    listId.Add(listOffer[firstCount].idOffer);
+                }
+            }
+            for (int count = 0; count < listId.Count; count++)
+            {
+                Offer tmp = getOffer(listId[count]);
+                Offer tmpOffer = new Offer
+                {
+                    idOffer = tmp.idOffer,
+                    Mount = mountOfItemOffer(tmp),
+                    OfferPrice = tmp.OfferPrice * mountOfItemOffer(tmp),
+                    OriginalPrice = tmp.OriginalPrice,
+                    Name = tmp.Name
+                };
+                listOfferTmp.Add(tmpOffer);
+            }
+            return listOfferTmp;
+        }
+
+        public int mountOfItemOffer(Offer pOffer)
+        {
+            int mount = 0;
+            for (int thirdCount = 0; thirdCount < listOffer.Count; thirdCount++)
+            {
+                if (listOffer[thirdCount].idOffer == pOffer.idOffer)
+                {
+                    mount = mount + 1;
+
+                }
+
+            }
+            return mount;
+        }
+
+        public Offer getOffer(int pId)
+        {
+            for (int thirdCount = 0; thirdCount < listOffer.Count; thirdCount++)
+            {
+                if (listOffer[thirdCount].idOffer == pId)
+                {
+                    return listOffer[thirdCount];
+                }
+            }
+            return null;
+        }
+
+        public void setListOffer(List<Offer> pListOffer)
+        {
+            this.listOffer = pListOffer;
+        }
+
+        public void setListProduct(List<Product> pListProduct)
+        {
+            this.listProduct = pListProduct;
+        }
+
     }
 }

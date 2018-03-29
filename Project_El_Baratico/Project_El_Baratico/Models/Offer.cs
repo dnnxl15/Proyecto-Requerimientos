@@ -13,6 +13,7 @@ namespace Project_El_Baratico.Models
         int originalPrice;
         int offerPrice;
         string name;
+        private int mount;
 
         // Getter and setter
 
@@ -20,5 +21,6 @@ namespace Project_El_Baratico.Models
         public int OfferPrice { get; set; }
         public string Name { get; set; }
         public int IdOffer { get; set; }
+        public int Mount { get; set; }
     }
 }
