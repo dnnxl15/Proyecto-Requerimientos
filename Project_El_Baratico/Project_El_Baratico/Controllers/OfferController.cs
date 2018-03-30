@@ -215,5 +215,45 @@ namespace Project_El_Baratico.Controllers
             ViewBag.purchase = control.getPurchaseByClient(client.Username);
             return View();
         }
+
+        /**
+        * Method rate offer
+        * Author: Danny Xie Li
+        * Description: Direct to the view offer, rate offer.
+        * Created: 30/03/18
+        * Last modification: 30/03/18
+        */
+        [HttpPost]
+        public ActionResult rateOffer()
+        {
+            control = new ControlData();
+            string puntuaction = Request.Form["puntuacion"].ToString();
+            string idProduct = Request.Form["pIdOffer"].ToString();
+            Product productTmp = control.getProductById(Int32.Parse(idProduct));
+            control.insertRate(client.Username, productTmp.Name, Int32.Parse(puntuaction));
+            //return HttpUtility.HtmlEncode("Hello " + idProduct + ", NumTimes is: " + puntuaction);
+
+            return RedirectToAction("Offer", "Offer");
+
+        }
+
+        /**
+        * Method rate product
+        * Author: Danny Xie Li
+        * Description: Direct to the view product, rate product.
+        * Created: 30/03/18
+        * Last modification: 30/03/18
+        */
+        [HttpPost]
+        public ActionResult rateProduct(string pId)
+        {
+            control = new ControlData();
+            string puntuaction = Request.Form["puntuacion"].ToString();
+            string idProduct = Request.Form["pId"].ToString();
+            Product productTmp = control.getProductById(Int32.Parse(idProduct));
+            control.insertRate(client.Username, productTmp.Name, Int32.Parse(puntuaction));
+            return RedirectToAction("seeProduct", "Offer");
+
+        }
     }
 }

@@ -439,5 +439,38 @@ namespace Project_El_Baratico.Models
             }
             return listPurchase;
         }
+
+        /**
+        * Method rate the product
+        * Author: Danny Xie Li
+        * Description: rate the product.
+        * Created: 30/03/18
+        * Last modification: 30/03/18
+        */
+        public void insertRate(string pName, string pProduct, int pCalification)
+        {
+            DBConnection conection = new DBConnection();
+            conection.OpenConnection();
+            MySqlCommand command = new MySqlCommand(Interface.IConstant.PROCEDURE_INSERT_RATE, conection.getConnection());
+            command.CommandType = CommandType.StoredProcedure;
+            command.Parameters.AddWithValue("@pClientName", pName);          // Set the parameter
+            command.Parameters.AddWithValue("@pProductName", pProduct);          // Set the parameter
+            command.Parameters.AddWithValue("@pCalification", pCalification);          // Set the parameter
+
+            MySqlTransaction trx = conection.getConnection().BeginTransaction();
+            try
+            {
+                command.Prepare();
+            }
+            catch (Exception e)
+            {
+            }
+            command.Transaction = trx;
+            command.ExecuteNonQuery();
+            trx.Commit();
+        }
+
+
+
     }
 }

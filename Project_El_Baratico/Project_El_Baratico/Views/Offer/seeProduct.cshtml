@@ -47,19 +47,36 @@
         </div>
     </nav>
 
-    <form method="post" action="ActionName">
-        @foreach (var str in ViewBag.Collection)
-        {
-            <div>
-                <h1 name="pProduct">@Html.Raw(str.Name);</h1>
-                <h2>@Html.Raw(str.Price)</h2>
-                <h3>@Html.Raw(str.Category)</h3>
-                <h3>@Html.Raw("ID: " + str.Id)</h3>
-                <input id="btn1" type="button" value="Add to cart" onclick="javascript:SubmitForm(@str.Id)" />
-                <button name="Rate" id="btnRate_" + str.Id>Rate </button>
-            </div>
-        }
-    </form>
+    
+
+
+    @foreach (var str in ViewBag.Collection)
+    {
+        <div>
+            <h1 name="pProduct">Name @Html.Raw(str.Name)</h1>
+            <h2>Original price @Html.Raw(str.Price)</h2>
+            <h3>Offer price @Html.Raw(str.Category)</h3>
+            <h3 name="offerId">ID : @Html.Raw(str.Id)</h3>
+            <form method="post" action="rateProduct">
+
+                <input type="search" name="pId" value=@Html.Raw(str.Id) readonly />
+                <select name="puntuacion" id="puntuacion">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select>
+                <button type="submit">Rate</button>
+            </form>
+            <input id="btn1" type="button" value="Add to cart" onclick="javascript:SubmitForm(@Html.Raw(str.Id))" />
+        </div>
+    }
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

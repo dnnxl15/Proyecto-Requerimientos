@@ -32,6 +32,6 @@ namespace Project_El_Baratico.Interface
         public const string PROCEDURE_INSERT_PURCHASE = "purchase";
         public const string PROCEDURE_GET_PURCHASE_BY_CLIENT = "getPurchaseByClient";
 
-
+        public const string PROCEDURE_INSERT_RATE = "insertRate";
     }
 }

@@ -46,19 +46,33 @@
             </form>
         </div>
     </nav>
-    <form method="post" action="ActionName">
     @foreach (var str in ViewBag.Collection)
     {
-        <div>
-            <h1 name="pProduct">Name @Html.Raw(str.Name)</h1>
-            <h2>Original price @Html.Raw(str.OriginalPrice)</h2>
-            <h3>Offer price @Html.Raw(str.OfferPrice)</h3>
-            <h3>ID : @Html.Raw(str.idOffer)</h3>
-            <input id="btn1" type="button" value="Add to cart" onclick="javascript:SubmitForm(@Html.Raw(str.idOffer))" />
-            <button name="Rate" id="btnRate_" + str.idOffer>Rate</button>
-        </div>
+    <div>
+        <h1 name="pProduct">Name @Html.Raw(str.Name)</h1>
+        <h2>Original price @Html.Raw(str.OriginalPrice)</h2>
+        <h3>Offer price @Html.Raw(str.OfferPrice)</h3>
+        <h3 name="offerId">ID : @Html.Raw(str.idOffer)</h3>
+        <form method="post" action="rateOffer">
+
+            <input type="search" name="pIdOffer"  value=@Html.Raw(str.idOffer) readonly />
+            <select name="puntuacion" id="puntuacion">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
+            <button type="submit">Rate</button>
+        </form>
+        <input id="btn1" type="button" value="Add to cart" onclick="javascript:SubmitForm(@Html.Raw(str.idOffer))" />
+    </div>
     }
-    </form>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -69,6 +83,10 @@
         function SubmitForm(id)
         {
             document.forms[0].action = 'addOffer/'+id+'?' ;
+            document.forms[0].submit();
+        }
+        function SubmitRate(id) {
+            document.forms[0].action = 'rateProduct/' + id + '?';
             document.forms[0].submit();
         }
         function SubmitCategory(category)
